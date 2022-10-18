@@ -1,4 +1,3 @@
-
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -58,54 +57,44 @@ void free_singly_linked_list(SinglyLinkedListNode* node) {
     }
 }
 
-SinglyLinkedListNode* insertNodeAtPosition(SinglyLinkedListNode* llist, int data, int position) {
-    SinglyLinkedListNode *temp=new SinglyLinkedListNode(data);
-SinglyLinkedListNode *nh= llist;
-for(int i=0;i<position-1;i++)
-{
-    nh=nh->next;
-}
-SinglyLinkedListNode *t;
-t=nh->next ;
-nh->next=temp;
-temp->next=t;
-return llist;
+/*
+ * Complete the 'insertNodeAtPosition' function below.
+ *
+ * The function is expected to return an INTEGER_SINGLY_LINKED_LIST.
+ * The function accepts following parameters:
+ *  1. INTEGER_SINGLY_LINKED_LIST llist
+ *  2. INTEGER data
+ *  3. INTEGER position
+ */
+
+/*
+ * For your reference:
+ *
+ * SinglyLinkedListNode {
+ *     int data;
+ *     SinglyLinkedListNode* next;
+ * };
+ *
+ */
+
+SinglyLinkedListNode* insertNodeAtPosition(SinglyLinkedListNode* llist, int n, int position) {
+    SinglyLinkedListNode *new_node=new SinglyLinkedListNode(n);
+    SinglyLinkedListNode *temp = llist;
+    if(llist==NULL){
+        return new_node;
+    }
+    int i=0;
+    while (i< position - 1){
+        temp=temp->next;
+        i++;
+    }
+    new_node->next=temp->next;
+    temp->next=new_node;
+    
+    
+    return llist;
+    
+
 }
 
 int main()
-{
-    ofstream fout(getenv("OUTPUT_PATH"));
-
-    SinglyLinkedList* llist = new SinglyLinkedList();
-
-    int llist_count;
-    cin >> llist_count;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-    for (int i = 0; i < llist_count; i++) {
-        int llist_item;
-        cin >> llist_item;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-        llist->insert_node(llist_item);
-    }
-
-    int data;
-    cin >> data;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-    int position;
-    cin >> position;
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-    SinglyLinkedListNode* llist_head = insertNodeAtPosition(llist->head, data, position);
-
-    print_singly_linked_list(llist_head, " ", fout);
-    fout << "\n";
-
-    free_singly_linked_list(llist_head);
-
-    fout.close();
-
-    return 0;
-}
